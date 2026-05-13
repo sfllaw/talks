@@ -1,0 +1,53 @@
+# Why is io.Reader so weird?
+Exploring the third best interface in Go
+18:30 13 May 2025
+
+Simon Law
+Member of Technical Staff, Tailscale
+https://tinyurl.com/tailcareers
+
+## error
+
+.code error.go
+
+The error built-in interface type is the conventional interface for representing an error condition, with the nil value representing no error.
+
+## Stringer
+
+.code stringer.go
+
+Stringer is implemented by any value that has a String method, which defines the “native” format for that value. The String method is used to print values passed as an operand to any format that accepts a string or to an unformatted printer such as Print.
+
+## io.Reader
+
+.code io-reader.go
+
+Reader is the interface that wraps the basic Read method.
+
+## io.Reader
+
+.code io-reader.go
+
+.html io-reader.html
+
+## io.ReadAll
+
+.code io-readall.go
+
+ReadAll reads from r until an error or EOF and returns the data it read. A successful call returns err == nil, not err == EOF. Because ReadAll is defined to read from src until EOF, it does not treat an EOF from Read as an error to be reported.
+
+.play -edit io-readall-example.go /BEGIN OMIT/,/END OMIT/
+
+## io.Reader
+
+.code io-reader.go
+
+.play -edit io-reader-example.go /BEGIN OMIT/,/END OMIT/
+
+## archive/tar.Reader
+
+.code archive-tar-reader.go
+
+## Standard Library
+
+.link https://cs.opensource.google/search?q=Read%5C(%5Cw%2B%5Cs%5C%5B%5C%5Dbyte%5C)%20-path:test&ss=go%2Fgo Read([]byte) in the Go standard library
